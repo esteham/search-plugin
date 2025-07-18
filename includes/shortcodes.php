@@ -1,5 +1,5 @@
 <?php
-function search_form_shortcode() {
+function custom_search_form_shortcode() {
     ob_start();
     ?>
     <form role="search" method="get" class="custom-search-form" action="<?php echo esc_url(home_url('/')); ?>">
@@ -9,7 +9,7 @@ function search_form_shortcode() {
     <?php
     return ob_get_clean();
 }
-add_shortcode('content_search', 'search_form_shortcode');
+add_shortcode('custom_search', 'custom_search_form_shortcode');
 
 function custom_search_results_shortcode() {
     if (is_search()) {
