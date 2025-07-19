@@ -27,3 +27,28 @@ function custom_search_plugin_activate() {
 function custom_search_plugin_deactivate() {
     // Deactivation code here
 }
+
+// Enqueue scripts
+function custom_search_enqueue_scripts() {
+    wp_enqueue_script(
+        'custom-live-search',
+        plugin_dir_url(__FILE__) . 'js/custom-search.js',
+        array('jquery'),
+        '1.0',
+        true
+    );
+
+     wp_enqueue_style(
+        'custom-search-style',
+        plugin_dir_url(__FILE__) . 'css/custom-search.css',
+        array(),
+        '1.0'
+    );
+    
+    wp_localize_script(
+        'custom-live-search',
+        'ajaxurl',
+        admin_url('admin-ajax.php')
+    );
+}
+add_action('wp_enqueue_scripts', 'custom_search_enqueue_scripts');

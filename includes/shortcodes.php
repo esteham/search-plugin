@@ -1,11 +1,15 @@
 <?php
 function custom_search_form_shortcode() {
+    wp_enqueue_script('custom-live-search');
     ob_start();
     ?>
-    <form role="search" method="get" class="custom-search-form" action="<?php echo esc_url(home_url('/')); ?>">
-        <input type="search" class="search-field" placeholder="<?php echo esc_attr_x('Search...', 'placeholder'); ?>" value="<?php echo get_search_query(); ?>" name="s" />
-        <button type="submit" class="search-submit"><?php echo esc_attr_x('Search', 'submit button'); ?></button>
-    </form>
+    <div class="custom-search-container">
+        <form role="search" method="get" class="custom-search-form" action="<?php echo esc_url(home_url('/')); ?>">
+            <input type="search" id="live-search-input" class="search-field" placeholder="<?php echo esc_attr_x('Search...', 'placeholder'); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off" />
+            <button type="submit" class="search-submit"><?php echo esc_attr_x('Search', 'submit button'); ?></button>
+        </form>
+        <div id="live-search-results" class="live-search-results-container"></div>
+    </div>
     <?php
     return ob_get_clean();
 }
