@@ -2,6 +2,7 @@
 /*
 Plugin Name: Custom Content Search
 Description: A plugin to search and display website content
+Shortcode: [custom_search] for search form, [custom_search_results] for displaying search results.
 Version: 1.0
 Author: Esteham H. Zihad Ansari
 Author URI: https://xetroot.com
