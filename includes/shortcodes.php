@@ -1,12 +1,22 @@
 <?php
 function custom_search_form_shortcode() {
     wp_enqueue_script('custom-live-search');
+    wp_enqueue_style('custom-search-style');
+    
     ob_start();
     ?>
     <div class="custom-search-container">
         <form role="search" method="get" class="custom-search-form" action="<?php echo esc_url(home_url('/')); ?>">
-            <input type="search" id="live-search-input" class="search-field" placeholder="<?php echo esc_attr_x('Search...', 'placeholder'); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off" />
-            <button type="submit" class="search-submit"><?php echo esc_attr_x('Search', 'submit button'); ?></button>
+            <input type="search" id="live-search-input" class="search-field" 
+                   placeholder="<?php echo esc_attr_x('Search articles, pages...', 'placeholder'); ?>" 
+                   value="<?php echo get_search_query(); ?>" name="s" autocomplete="off"
+                   aria-label="Search website content">
+            <button type="submit" class="search-submit" aria-label="Submit search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </button>
         </form>
         <div id="live-search-results" class="live-search-results-container"></div>
     </div>

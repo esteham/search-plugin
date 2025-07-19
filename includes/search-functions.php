@@ -5,7 +5,7 @@ function custom_content_search($query) {
             's' => $query,
             'post_type' => array('post', 'page'),
             'post_status' => 'publish',
-            'posts_per_page' => 5 // Limit to 5 results for live search
+            'posts_per_page' => 5
         );
         
         $search_results = new WP_Query($args);
@@ -14,14 +14,19 @@ function custom_content_search($query) {
             $output = '<ul class="live-search-results">';
             while ($search_results->have_posts()) {
                 $search_results->the_post();
-                $output .= '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+                $output .= sprintf(
+                    '<li><a href="%s">%s</a><span class="result-excerpt">%s</span></li>',
+                    get_permalink(),
+                    get_the_title(),
+                    wp_trim_words(get_the_excerpt(), 15, '...')
+                );
             }
             $output .= '</ul>';
             wp_reset_postdata();
             return $output;
         }
     }
-    return '<ul class="live-search-results"><li>No results found</li></ul>';
+    return '<div class="no-results">No results found for "<strong>' . esc_html($query) . '</strong>"</div>';
 }
 
 // AJAX handler for live search
